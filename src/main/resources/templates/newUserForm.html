@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<h2>New user info:</h2>
+<form th:action="@{/admin/new}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label th:name="username">Username:</label>
+    <input type="text" th:name="username" th:field="*{username}"/>
+    <br>
+    <label th:name="password">Password:</label>
+    <input type="text" th:name="password" th:field="*{password}"/>
+    <br>
+    <label th:name="email">Email:</label>
+    <input type="text" th:name="email" th:field="*{email}"/>
+    <br>
+    <label>Roles:</label>
+    <div th:each="role : ${roleList}">
+        <input type="checkbox" th:field="*{roles}" th:value="${role.id}"/>
+        <label th:for="${role.id}" th:text="${role.name}"></label>
+    </div>
+    <br>
+    <input type="submit" value="Save">
+    <input type="button" value="Back" onclick="window.location.href='/admin'">
+</form>
+</body>
+</html>
